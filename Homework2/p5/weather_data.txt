@@ -1,0 +1,14 @@
+StationA,09:28:09 AM 04/20/2026,72.5
+StationA,10:15:00 AM 04/19/2026,70.0
+StationA,08:00:00 AM 04/18/2026,68.3
+StationB,11:00:00 AM 04/20/2026,85.0
+StationB,09:30:00 AM 04/19/2026,60.0
+StationB,07:45:00 AM 04/18/2026,58.2
+StationC,06:00:00 AM 04/20/2026,-15.5
+StationC,06:00:00 AM 04/19/2026,-20.0
+StationC,06:00:00 AM 04/18/2026,-10.0
+StationA,09:28:09 AM 04/20/2026,73.0
+StationD,12:00:00 PM 04/20/2026,200.0
+StationE,bad_date_here,50.0
+this line has no commas at all
+StationF,01:00:00 PM 04/20/2026,not_a_number
