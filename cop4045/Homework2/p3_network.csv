@@ -1,7 +1,0 @@
-username,full_name,friends
-alice,Alice Smith,maria;joe
-maria,Maria Cortez,alice;joe;david
-joe,Joseph Adams,maria;eve;alice
-eve,Evelyn Cooper,joe
-david,David Benson,maria
-frank,Frank Miller,
