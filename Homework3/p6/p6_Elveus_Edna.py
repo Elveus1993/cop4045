@@ -187,3 +187,89 @@ def find_large_files(entry: Entry, minimum_size: int) -> List[File]:
         return matches
 
     return []
+
+
+def _print_tree(entry: Entry, depth: int = 0) -> None:
+    """Print an entry and its descendants with indentation.
+
+    Args:
+        entry: The entry to print.
+        depth: The current indentation depth.
+
+    Returns:
+        None.
+    """
+    print(f"{'  ' * depth}{entry.name}: {entry.size()} bytes")
+    if isinstance(entry, Folder):
+        for child in entry.children():
+            _print_tree(child, depth + 1)
+
+
+def _entry_names(entries: List[Entry]) -> List[str]:
+    """Return the names of entries.
+
+    Args:
+        entries: The entries whose names are returned.
+
+    Returns:
+        The entry names in the same order as entries.
+    """
+    return [entry.name for entry in entries]
+
+
+def main() -> None:
+    """Demonstrate folder sizes, file thresholds, and absolute paths.
+
+    Args:
+        None.
+
+    Returns:
+        None.
+    """
+    root: Folder = Folder("root")
+    projects: Folder = Folder("projects")
+    source: Folder = Folder("source")
+    module: Folder = Folder("module")
+
+    root_file: File = File("readme.txt", 100)
+    project_file: File = File("notes.txt", 250)
+    source_file: File = File("config.txt", 50)
+    deep_file: File = File("data.bin", 400)
+
+    root.add(projects)
+    root.add(root_file)
+    projects.add(source)
+    projects.add(project_file)
+    source.add(module)
+    source.add(source_file)
+    module.add(deep_file)
+
+    print("Tree:")
+    _print_tree(root)
+
+    print("\nPart f, size:")
+    root_size: int = root.size()
+    expected_total: int = 100 + 250 + 50 + 400
+    print(f"Root size: {root_size} bytes")
+    print(f"Expected total (100 + 250 + 50 + 400): {expected_total} bytes")
+    print(f"Root size matches expected total: {root_size == expected_total}")
+    print(f"Source folder size: {source.size()} bytes")
+
+    print("\nPart f, thresholds:")
+    for threshold in (200, 350):
+        files: List[File] = find_large_files(root, threshold)
+        file_details: List[str] = [
+            f"{file_entry.name} ({file_entry.size()} bytes)"
+            for file_entry in files
+        ]
+        print(f"Minimum size {threshold} bytes: {file_details}")
+
+    print("\nPart g, absolute_path:")
+    for entry in (deep_file, source, root):
+        path_names: List[str] = _entry_names(entry.absolute_path())
+        print(f"{entry.name} names: {path_names}")
+        print(f"{entry.name} path: {' <- '.join(path_names)}")
+
+
+if __name__ == "__main__":
+    main()

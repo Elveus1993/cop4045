@@ -477,7 +477,7 @@ def main(predator_breed_time: int = 6,
     plt.xlabel("Tick")
     plt.ylabel("Population")
     plt.title("Predator-Prey Simulation with Humans -- "
-              "Elveus, FAU ID <YOUR_FAU_ID_HERE>")
+              "Edna Elveus")
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
